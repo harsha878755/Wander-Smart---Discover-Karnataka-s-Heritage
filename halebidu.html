@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halebidu – Heritage Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff8e1;
+      font-family: 'Inter', sans-serif;
+      color: #4e342e;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('https://th.bing.com/th/id/R.8b301e194fafa53fb6aa4a6d823edd73?rik=%2bzxOOs75jCtYfw&riu=http%3a%2f%2fc8.alamy.com%2fcomp%2fET1NDF%2fhoysaleswara-temple-halebid-halebidu-hassan-karnataka-india-ET1NDF.jpg&ehk=iMRZqlB9TZNe88FkVabrjY8rgF8Ir3DMeYFUOM4MePY%3d&risl=&pid=ImgRaw&r=0') center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: #fff3d4;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 35px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b71c1c;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 330px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    /* Storytelling Bot */
+    .story-box {
+      background: #fbe9d7;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    .map {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-decoration: none;
+      color: #4e342e;
+      font-weight: 600;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      background: #ffe3b0;
+      transform: translateY(-3px);
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Halebidu – The Jewel of Hoysala Architecture</h1>
+    <p>A 900-year-old masterpiece carved in stone</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Storytelling Bot -->
+    <div class="section story-box">
+      <h2>Storytelling Bot – Listen to Halebidu’s Tale</h2>
+
+      <!-- UPDATED STORY (Narration-friendly) -->
+      <div id="storyText">
+        <p>
+          Halebidu’s story is both heartbreaking and breathtaking. It was once the glorious capital of the Hoysala Empire,
+          attacked and looted in the past, but even after destruction, its beauty remains.
+        </p>
+
+        <p>
+          The Hoysaleshwara Temple is more than architecture — it is storytelling carved into soapstone.
+          The walls overflow with tiny sculptures: gods, animals, dancers, warriors, and full myth scenes
+          stitched together in stone.
+        </p>
+
+        <p>
+          Every inch of the temple has something to say. The carvings are so detailed that you can almost
+          feel movement frozen in time.
+        </p>
+
+        <p>
+          Halebidu teaches a quiet lesson: empires fall, but art endures. It is a story of resilience —
+          beauty that refused to disappear even when history tried to erase it.
+        </p>
+      </div>
+
+      <div class="story-controls">
+        <button onclick="speakStory()">🔊 Narrate</button>
+        <button onclick="muteStory()">🔇 Mute</button>
+      </div>
+
+      <script>
+        let speechInstance;
+        function speakStory() {
+          const text = document.getElementById("storyText").innerText;
+          speechInstance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.speak(speechInstance);
+        }
+        function muteStory() {
+          window.speechSynthesis.cancel();
+        }
+      </script>
+    </div>
+
+    <!-- Discovery Engine -->
+    <div class="section">
+      <h2>🔍 Discovery Engine – Hidden Spots of Halebidu</h2>
+      <div class="card-grid">
+
+        <a href="https://www.google.com/search?q=Kedareshwara+Temple+Halebidu"
+           target="_blank"
+           class="card">⬤ Kedareshwara Temple</a>
+
+        <a href="https://www.google.com/search?q=Hoysala+Museum+Halebidu"
+           target="_blank"
+           class="card">⬤ Hoysala Museum</a>
+
+        <a href="https://www.google.com/search?q=Pushkarani+Step+Tank+Halebidu"
+           target="_blank"
+           class="card">⬤ Pushkarani Step Tank</a>
+
+        <a href="https://www.google.com/search?q=Halebidu+Archaeological+Ruins"
+           target="_blank"
+           class="card">⬤ Archaeological Ruins</a>
+
+      </div>
+    </div>
+
+    <!-- Cultural Media -->
+    <div class="section">
+      <h2>🎥 Cultural Media Collector</h2>
+
+      <h3>YouTube Exploration</h3>
+      <iframe src="https://www.youtube.com/embed/ekkpGm_F7Wo" allowfullscreen></iframe>
+
+      <h3>Instagram Moments</h3>
+      <iframe src="https://www.instagram.com/reel/DOxYDaSE9hU/embed" allowfullscreen></iframe>
+
+      <h3>Wikipedia Summary</h3>
+      <iframe src="https://en.m.wikipedia.org/wiki/Halebidu"></iframe>
+    </div>
+
+    <!-- Nearby Explorer -->
+    <div class="section">
+      <h2>📍 Smart Nearby Explorer</h2>
+      <ul>
+        <li>Kedareshwara Temple – 1.1 km</li>
+        <li>Hoysala Museum – 450 m</li>
+        <li>Basadi Halli (Jain Temples) – 800 m</li>
+        <li>Yagachi Dam – 10 km</li>
+      </ul>
+    </div>
+
+    <!-- Google Map -->
+    <div class="section">
+      <h2>🗺 Google Map</h2>
+      <iframe class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.946412127411!2d75.99392161533434!3d13.207964090687225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbbc552171a93cd%3A0x6cbd8768f2966ac5!2sHoysaleshwara%20Temple%2C%20Halebeedu%2C%20Karnataka%20573121!5e0!3m2!1sen!2sin!4v1708032829040!5m2!1sen!2sin"
+        allowfullscreen loading="lazy"></iframe>
+    </div>
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+  </div>
+</body>
+</html>

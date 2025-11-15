@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WanderSmart – Karnataka Heritage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --maroon:#b71c1c; --cream:#fff8e1; --yellow:#fdd835; --card:#fff3cd; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Inter',sans-serif;background:var(--cream);color:var(--maroon);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    header{background:var(--yellow);color:var(--maroon);padding:28px 20px;text-align:center;}
+    header h1{font-family:'Playfair Display',serif;font-size:2.6rem;margin:0;}
+    header p{margin:8px 0 0;font-weight:600;}
+    nav{position:sticky;top:0;z-index:999;background:var(--maroon);display:flex;align-items:center;justify-content:space-between;padding:10px 18px;box-shadow:0 4px 14px rgba(0,0,0,0.08);}
+    nav .nav-center{flex:1;display:flex;justify-content:center;} nav a{color:var(--cream);text-decoration:none;font-weight:900;font-size:1rem;}
+    .hero{background-image:url('https://assets.cntraveller.in/photos/66274454db07947d7b4ebc27/16:9/w_1280,c_limit/GettyImages-1343698748.jpg');height:420px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-size:2.6rem;text-shadow:2px 2px 8px rgba(0,0,0,0.6);border-bottom:4px solid var(--maroon);}
+    .places-section{padding:22px 18px 46px;max-width:1200px;margin:0 auto;}
+    .region-title{display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--maroon);font-family:'Playfair Display';font-size:2rem;color:var(--maroon);margin-bottom:18px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:18px;}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.10);transition:transform .28s ease,box-shadow .28s;text-align:center;overflow:hidden;}
+    .card:hover{transform:translateY(-8px);box-shadow:0 14px 30px rgba(0,0,0,0.14);}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:10px;display:block;filter:blur(6px);transition:filter .6s ease;}
+    .card img.lazy-loaded{filter:blur(0);}
+    .card h3{font-family:'Playfair Display';margin:12px 0 6px;font-size:1.2rem;color:var(--maroon);}
+    .card p{margin:0;color:#4e2a2a;font-size:0.98rem;} .card a{display:inline-block;margin-top:10px;color:var(--maroon);font-weight:700;text-decoration:underline;}
+
+    /* Chat widget */
+    #chatbox-wrapper{display:flex;justify-content:center;margin:36px 0 80px;}
+    #chatbox{width:92%;max-width:720px;background:#fffdf5;border-radius:14px;border:1px solid #f0e4bf;box-shadow:0 10px 30px rgba(0,0,0,0.10);overflow:hidden;display:flex;flex-direction:column;}
+    .chat-header{padding:14px 18px;background:#fff7e8;border-bottom:1px solid #efe0b8;font-family:'Playfair Display';color:var(--maroon);font-size:1.1rem;display:flex;align-items:center;justify-content:space-between;}
+    .chat-body{padding:16px;min-height:160px;max-height:320px;overflow-y:auto;background:linear-gradient(180deg,#fff 0%,#fffdf5 100%);display:flex;flex-direction:column;gap:10px;}
+    .bubble{max-width:78%;padding:10px 14px;border-radius:14px;line-height:1.4;font-size:0.98rem;box-shadow:0 6px 14px rgba(0,0,0,0.04);}
+    .bubble.bot{background:#fff1c9;color:#3b1b1b;align-self:flex-start;border-bottom-left-radius:4px;}
+    .bubble.user{background:var(--maroon);color:var(--cream);align-self:flex-end;border-bottom-right-radius:4px;}
+
+    .result-card{align-self:stretch;background:#fff6da;border-radius:14px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.06);border:1px solid rgba(183,28,28,0.06);margin-top:6px;color:var(--maroon);font-size:1rem;}
+    .result-card h4{margin:0 0 8px;font-family:'Playfair Display';font-size:1.05rem;color:var(--maroon);}
+    .result-row{margin:12px 0;display:flex;gap:12px;align-items:flex-start;}
+    .result-label{font-weight:800;min-width:170px;display:block;}
+    .result-value{flex:1;color:#3b1b1b;white-space:pre-wrap;}
+
+    .chat-footer{padding:12px;display:flex;gap:10px;align-items:center;border-top:1px solid #efe0b8;background:#fff9ec;}
+    .input{flex:1;padding:10px 14px;border-radius:12px;border:1px solid #ecdba9;font-size:1rem;background:#fffdf9;}
+    .btn{background:var(--maroon);color:var(--cream);padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;}
+    .btn.secondary{background:#fff;color:var(--maroon);border:1px solid #f0d98e;padding:8px 12px;}
+    .typing{font-style:italic;color:#6d4a3b;font-size:0.9rem;margin-left:6px;}
+
+    #floating-mic{position:fixed;right:22px;bottom:22px;width:64px;height:64px;border-radius:50%;background:var(--maroon);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.18);z-index:1200;}
+    #floating-mic.active{background:#a31515;transform:scale(1.05);}
+
+    .footer{background:var(--maroon);color:var(--cream);text-align:center;padding:18px;margin-top:30px;font-size:1rem;}
+    @media (max-width:720px){ header h1{font-size:1.6rem;} .hero{height:240px;font-size:1.6rem;} .chat-body{max-height:220px;} #chatbox{max-width:92%;} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome To WanderSmart</h1>
+    <p>Explore ancient wonders 500–1800 years old</p>
+  </header>
+
+  <nav>
+    <div class="nav-center">
+      <a href="#heritage">Heritage Sites</a>
+    </div>
+  </nav>
+
+  <div class="hero">Discover Karnataka’s Heritage</div>
+
+  <section class="places-section" id="heritage">
+    <div style="text-align:center;">
+      <div class="region-title">Karnataka – Ancient Civilisations</div>
+    </div>
+
+    <div class="grid" id="placesGrid">
+      <div class="card" data-category="chalukya" data-name="Hampi">
+        <img loading="lazy" src="https://99notes.in/wp-content/uploads/2023/02/hampi-1024x684.jpg" alt="Hampi" />
+        <h3>Hampi</h3>
+        <p>Vijayanagara Empire (600+ years)</p>
+        <a href="hampi.html">More Info</a>
+      </div>
+      <div class="card" data-category="hoysala" data-name="Belur Chennakesava Temple">
+        <img loading="lazy" src="https://tse1.mm.bing.net/th/id/OIP.05Pe2envUsuulMVHXyErhQHaE5" alt="Belur" />
+        <h3>Belur Chennakesava Temple</h3>
+        <p>Hoysala Architecture (900 years)</p>
+        <a href="belur.html">More Info</a>
+      </div>
+      <div class="card" data-category="hoysala" data-name="Halebidu Hoysaleshwara Temple">
+        <img loading="lazy" src="https://i.pinimg.com/originals/96/4f/02/964f02b23005ea033cad4b1732451a58.jpg" alt="Halebidu" />
+        <h3>Halebidu Hoysaleshwara Temple</h3>
+        <p>Hoysala Architecture (900 years)</p>
+        <a href="halebidu.html">More Info</a>
+      </div>
+      <div class="card" data-category="chalukya" data-name="Badami Cave Temples">
+        <img loading="lazy" src="https://tse3.mm.bing.net/th/id/OIP.bg4L_dsilAsop_bMiAhgkgHaE0" alt="Badami" />
+        <h3>Badami Cave Temples</h3>
+        <p>Early Chalukya (1400 years)</p>
+        <a href="badami.html">More Info</a>
+      </div>
+      <div class="card" data-category="chalukya" data-name="Pattadakal">
+        <img loading="lazy" src="https://tse1.mm.bing.net/th/id/OIP.RKU5qxbztRBeC1YZwbqOcgHaEK" alt="Pattadakal" />
+        <h3>Pattadakal</h3>
+        <p>UNESCO Chalukya Site (1200 years)</p>
+        <a href="pattadakal.html">More Info</a>
+      </div>
+      <div class="card" data-category="chalukya" data-name="Aihole">
+        <img loading="lazy" src="https://tse4.mm.bing.net/th/id/OIP.TlV8tsGM6q0uNxZHzHepqgHaE3" alt="Aihole" />
+        <h3>Aihole</h3>
+        <p>Cradle of Temple Architecture (1500 years)</p>
+        <a href="aihole.html">More Info</a>
+      </div>
+      <div class="card" data-category="hoysala" data-name="Somanathapura">
+        <img loading="lazy" src="https://tse1.mm.bing.net/th/id/OIP.KXokmZ8ezknnDvh7piiiDQHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Somanathapura" />
+        <h3>Somanathapura</h3>
+        <p>Hoysala Keshava Temple (750 years)</p>
+        <a href="somanathapura.html">More Info</a>
+      </div>
+      <div class="card" data-category="jain" data-name="Shravanabelagola">
+        <img loading="lazy" src="https://i.pinimg.com/originals/c6/c7/6a/c6c76adfc6509f2ee81e14f01854e1ed.jpg" alt="Shravanabelagola" />
+        <h3>Shravanabelagola</h3>
+        <p>Jain Heritage – Bahubali Statue (1000 years)</p>
+        <a href="shravanabelagola.html">More Info</a>
+      </div>
+      <div class="card" data-category="kadamba" data-name="Banavasi">
+        <img loading="lazy" src="https://tse3.mm.bing.net/th/id/OIP.FrWhf8n33YAGDJOWfhJTUAHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Banavasi" />
+        <h3>Banavasi</h3>
+        <p>Ancient Kadamba Capital (1800 years)</p>
+        <a href="banavasi.html">More Info</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="chatbox-wrapper">
+    <div id="chatbox" role="region" aria-label="Heritage assistant chat">
+      <div class="chat-header">
+        <div>Heritage AI Assistant</div>
+        <div style="font-size:0.9rem;color:#6b3d3d;">Voice + Text</div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="bubble bot">Hi — paste text or speak (🎙) and I'll detect the year, summarise the history and suggest a category.</div>
+      </div>
+
+      <div class="chat-footer">
+        <input id="chatInput" class="input" placeholder="Type here or press the mic to speak..." aria-label="Chat input" />
+        <button id="micBtn" class="btn secondary" title="Start voice input">🎙</button>
+        <button id="sendBtn" class="btn" title="Analyze text">Analyze</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="floating-mic" title="Start voice input">🎙</div>
+
+  <footer class="footer">&copy; 2025 WanderSmart | Made with ❤ in Karnataka</footer>
+
+  <script>
+    /*
+      CLIENT-SIDE OPENAI CHAT (OPTION A)
+      - This page calls the OpenAI Chat Completions endpoint directly from the browser.
+      - WARNING: Storing an API key in client-side JS is insecure. Use this only for testing or prototypes.
+      - To use: paste your key into OPENAI_API_KEY variable below.
+    */
+
+    // ---- CONFIG ----
+    // Put your API key here for quick testing. Do NOT ship this in production.
+    const OPENAI_API_KEY = '';
+    // Model to use (change as needed)
+    const OPENAI_MODEL = 'gpt-4o-mini';
+
+    // ---- UI helpers ----
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+
+    $$('img[loading="lazy"]').forEach(img => img.addEventListener('load', () => img.classList.add('lazy-loaded')));
+
+    const chatBody = $('#chatBody');
+    const chatInput = $('#chatInput');
+    const sendBtn = $('#sendBtn');
+    const micBtn = $('#micBtn');
+    const floatingMic = $('#floating-mic');
+
+    function appendBubble(text, who='bot') {
+      const d = document.createElement('div');
+      d.className = 'bubble ' + (who === 'user' ? 'user' : 'bot');
+      d.innerHTML = text.replace(/\n/g,'<br>');
+      chatBody.appendChild(d);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      return d;
+    }
+
+    function setTyping(state) {
+      let t = chatBody.querySelector('.typing-marker');
+      if (state) {
+        if (!t) {
+          t = document.createElement('div');
+          t.className = 'bubble bot typing-marker';
+          t.innerHTML = '<span class="typing">AI is typing<span class="dots">...</span></span>';
+          chatBody.appendChild(t);
+        }
+      } else {
+        if (t) t.remove();
+      }
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function showResultCard(result) {
+      const prev = document.getElementById('analysisResult');
+      if (prev) prev.remove();
+
+      const card = document.createElement('div');
+      card.id = 'analysisResult';
+      card.className = 'result-card';
+
+      const title = document.createElement('h4');
+      title.textContent = 'Analysis';
+      card.appendChild(title);
+
+      const makeRow = (label, value) => {
+        const row = document.createElement('div');
+        row.className = 'result-row';
+        const lab = document.createElement('div'); lab.className='result-label'; lab.textContent = label;
+        const val = document.createElement('div'); val.className='result-value'; val.textContent = value ?? '—';
+        row.appendChild(lab); row.appendChild(val);
+        return row;
+      };
+
+      card.appendChild(makeRow('Detected Year Built:', result.year));
+      card.appendChild(makeRow('Summary:', result.summary));
+      card.appendChild(makeRow('Recommended Category:', result.category));
+      chatBody.appendChild(card);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Local KB fallback (keeps your previous client KB behavior)
+    const KB = [
+      { keys: ['hampi'], year: 'c. 14th–16th century (≈ 600 years)', category: 'Vijayanagara / Historical', summary: 'Hampi was the capital of the Vijayanagara Empire and is a vast group of ruined monuments. Famous for its Dravidian temples, royal pavilions and marketplaces, Hampi was a major medieval trading and cultural centre.' },
+      { keys: ['pattadakal'], year: 'c. 7th–8th century (≈ 1200 years)', category: 'Chalukya / UNESCO World Heritage', summary: 'Pattadakal is a UNESCO site combining Dravidian and Nagara architectural styles. It served as a ceremonial centre where Chalukya kings were coronated.' },
+      { keys: ['belur','chennakesava'], year: 'c. 12th–13th century (≈ 900 years)', category: 'Hoysala', summary: 'Belur Chennakesava Temple is a masterpiece of Hoysala architecture with intricate soapstone carvings.' },
+      { keys: ['halebidu','hoysaleshwara'], year: 'c. 12th–13th century (≈ 900 years)', category: 'Hoysala', summary: 'Halebidu contains the Hoysaleshwara temple complex known for detailed friezes and ornate pillars.' },
+      { keys: ['badami'], year: 'c. 6th–8th century (≈ 1400 years)', category: 'Early Chalukya', summary: 'Badami is famed for rock-cut cave temples carved into sandstone cliffs.' },
+      { keys: ['aihole'], year: 'c. 5th–8th century (≈ 1500 years)', category: 'Chalukya / Temple cradle', summary: 'Aihole is often called the cradle of Indian temple architecture with over a hundred temples.' },
+      { keys: ['somanathapura','kesava'], year: 'c. 13th–14th century (≈ 750 years)', category: 'Hoysala', summary: 'Somanathapura (Keshava Temple) is famous for crisp, geometric sculptures and well-preserved relief work.' },
+      { keys: ['shravanabelagola'], year: 'c. 10th–11th century (prominent 1000 years)', category: 'Jain Heritage', summary: 'Shravanabelagola is famous for the monolithic statue of Bahubali and inscriptions.' },
+      { keys: ['banavasi'], year: 'c. 3rd–4th century (≈ 1700+ years)', category: 'Kadamba / Ancient', summary: 'Banavasi was an early Kadamba kingdom capital with a long history of temple-building.' }
+    ];
+
+    function clientAnalyze(text) {
+      const t = (text || '').toLowerCase();
+      for (const item of KB) {
+        for (const k of item.keys) {
+          if (t.includes(k)) {
+            return { year: item.year, summary: item.summary, category: item.category };
+          }
+        }
+      }
+      const yearMatch = text.match(/(\d{2,4})\s*years?/i);
+      if (yearMatch) return { year: `${yearMatch[1]} years (approx.)`, summary: `This place is roughly ${yearMatch[1]} years old. Paste a full description or name for a specific summary.`, category: 'Historical' };
+      return { year: 'Unknown', summary: `I couldn't find a direct match in the local database. Paste a place name (e.g. "Hampi") or a sentence mentioning the site for a more specific summary.`, category: 'Historical / Unknown' };
+    }
+
+    // ---- Multi-turn chat state ----
+    const STORAGE_KEY = 'wander_chat_history_v1';
+    let messages = loadHistory();
+
+    function systemPrompt() {
+      return { role: 'system', content: 'You are a helpful assistant that detects approximate construction year, summarizes historical significance, and suggests a category (e.g., Hoysala, Chalukya, Vijayanagara, Jain Heritage). Be concise (2-4 sentences for summary).' };
+    }
+
+    function loadHistory() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (e) { console.warn(e); }
+      // default starter context
+      return [ systemPrompt(), { role: 'assistant', content: "Hi — paste text or speak and I'll detect the year, summarise the history and suggest a category." } ];
+    }
+
+    function saveHistory() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(messages)); } catch(e){} }
+
+    function pushUserMessage(text) { messages.push({ role: 'user', content: text }); saveHistory(); }
+    function pushAssistantMessage(text) { messages.push({ role: 'assistant', content: text }); saveHistory(); }
+
+    // ---- OpenAI client (browser) ----
+    async function callOpenAIChat(messagesForAPI) {
+      if (!OPENAI_API_KEY) throw new Error('NO_API_KEY');
+
+      const endpoint = 'https://api.openai.com/v1/chat/completions';
+      const payload = {
+        model: OPENAI_MODEL,
+        messages: messagesForAPI,
+        temperature: 0.3,
+        max_tokens: 450
+      };
+
+      const resp = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + OPENAI_API_KEY
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) {
+        const txt = await resp.text();
+        throw new Error('OpenAI error: ' + resp.status + ' ' + txt);
+      }
+
+      const j = await resp.json();
+      const content = j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+      return content || '';
+    }
+
+    // ---- High-level analyze flow ----
+    let processing = false;
+
+    async function analyzeTextFlow(text) {
+      if (!text || !text.trim()) return;
+      if (processing) return;
+      processing = true;
+
+      appendBubble(escapeHtml(text), 'user');
+      pushUserMessage(text);
+
+      setTyping(true);
+
+      // Try calling OpenAI if key provided; otherwise use clientAnalyze fallback
+      let assistantReply = null;
+      try {
+        if (OPENAI_API_KEY) {
+          // send last N messages (keep within token limits)
+          const windowMessages = [systemPrompt(), ...messages.filter(m=>m.role!=='system').slice(-8)];
+          const apiReply = await callOpenAIChat(windowMessages);
+          assistantReply = apiReply.trim();
+        } else {
+          throw new Error('no-key');
+        }
+      } catch (err) {
+        console.warn('Using client fallback due to error:', err);
+        const r = clientAnalyze(text);
+        assistantReply = `Detected year: ${r.year}\nCategory: ${r.category}\nSummary: ${r.summary}`;
+      }
+
+      setTyping(false);
+
+      appendBubble(escapeHtml(assistantReply), 'bot');
+      pushAssistantMessage(assistantReply);
+
+      // extract a friendly structured analysis if possible (simple parsing)
+      const parsed = parseStructured(assistantReply);
+      showResultCard(parsed);
+
+      // Auto TTS
+      speakText(parsed.summary || assistantReply);
+
+      processing = false;
+    }
+
+    function parseStructured(text) {
+      // naive extraction for 'Detected year', 'Category', 'Summary' patterns
+      const out = { year: 'Unknown', category: '—', summary: text };
+      const y = text.match(/Detected year:?\s*([^\n]+)/i);
+      if (y) out.year = y[1].trim();
+      const c = text.match(/Category:?\s*([^\n]+)/i);
+      if (c) out.category = c[1].trim();
+      const s = text.match(/Summary:?\s*([\s\S]+)/i);
+      if (s) out.summary = s[1].trim();
+      // fallback: if assistantReply is short, use it as summary
+      if (!out.summary || out.summary.length < 20) out.summary = text;
+      return out;
+    }
+
+    function speakText(text) {
+      try {
+        if (!text) return;
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-IN';
+        u.rate = 1.0;
+        u.pitch = 1.0;
+        // Auto-play the TTS
+        window.speechSynthesis.speak(u);
+      } catch (e) { console.warn('TTS failed', e); }
+    }
+
+    function escapeHtml(str) {
+      if (!str && str !== 0) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    // ---- Speech Recognition ----
+    let recognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => { micBtn.classList.add('active'); floatingMic.classList.add('active'); };
+      recognition.onend = () => { micBtn.classList.remove('active'); floatingMic.classList.remove('active'); };
+      recognition.onerror = (ev) => { console.warn('Speech recognition error', ev); micBtn.classList.remove('active'); floatingMic.classList.remove('active'); };
+      recognition.onresult = async (ev) => {
+        const spoken = ev.results[0][0].transcript;
+        await analyzeTextFlow(spoken);
+      };
+    } else {
+      micBtn.title = 'Speech not supported in this browser';
+      floatingMic.title = 'Speech not supported in this browser';
+    }
+
+    micBtn.addEventListener('click', () => {
+      if (!recognition) { appendBubble('Voice recognition is not available in your browser. Use Chrome/Edge for full voice features.', 'bot'); return; }
+      try { recognition.start(); } catch (e) { console.warn(e); }
+    });
+    floatingMic.addEventListener('click', () => {
+      if (!recognition) { appendBubble('Voice recognition is not available in your browser.', 'bot'); return; }
+      try { recognition.start(); } catch (e) { console.warn(e); }
+    });
+
+    // ---- Event wiring ----
+    sendBtn.addEventListener('click', () => { const text = chatInput.value.trim(); if (!text) return; analyzeTextFlow(text); chatInput.value=''; });
+    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBtn.click(); } });
+
+    // Clicking chatbox focuses input
+    $('#chatbox')?.addEventListener('click', (e) => { if (e.target.id !== 'chatInput') chatInput.focus(); });
+
+    // expose a quick helper to clear history (dev convenience)
+    window.WanderSmart = {
+      clearHistory: () => { localStorage.removeItem(STORAGE_KEY); messages = loadHistory(); alert('Chat history cleared'); }
+    };
+  </script>
+</body>
+</html>

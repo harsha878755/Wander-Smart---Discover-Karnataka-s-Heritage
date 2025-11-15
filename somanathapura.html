@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Somnathapura – Heritage Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff8e1;
+      font-family: 'Inter', sans-serif;
+      color: #4e342e;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('https://www.holidify.com/images/cmsuploads/compressed/Temple_at_Somnathpur_20180317143032.jpg') center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: #fff3d4;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 35px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b71c1c;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 330px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .story-box {
+      background: #fbe9d7;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    .map {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-decoration: none;
+      color: #4e342e;
+      font-weight: 600;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      background: #ffe3b0;
+      transform: translateY(-3px);
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Somnathapura – The Masterpiece of Hoysala Art</h1>
+    <p>A 750-year-old Trikuta Temple carved with unmatched perfection</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Story Bot -->
+    <div class="section story-box">
+      <h2>Storytelling Bot – Listen to Somnathapura's Tale</h2>
+
+      <!-- FORMATTED STORY (narration-friendly) -->
+      <div id="storyText">
+        <p>
+          Somnathapura is where Hoysala artisans reached their artistic peak. The Keshava (Chennakesava)
+          Temple was built with perfect symmetry and stands as one of the finest examples of Hoysala craftsmanship.
+        </p>
+
+        <p>
+          Every wall is like a gallery of tiny, intricate carvings — gods, dancers, floral patterns, celestial
+          beings, and fine details that show extraordinary skill. The carvings are so precise they seem almost alive.
+        </p>
+
+        <p>
+          Unlike many other sites that suffered over time, Somnathapura stands remarkably well preserved.
+          It feels like a living museum of stone, where each sculpture has been carefully protected by history.
+        </p>
+
+        <p>
+          Walk around the star-shaped platform and you’ll notice something magical — every sculpture feels
+          deliberate, balanced, and perfectly measured, as if the artisans were chasing perfection itself.
+        </p>
+
+        <p>
+          Somnathapura is a story of devotion and dedication — a monument where craftsmanship reached its
+          purest and most refined form.
+        </p>
+      </div>
+
+      <div class="story-controls">
+        <button onclick="speakStory()">🔊 Narrate</button>
+        <button onclick="muteStory()">🔇 Mute</button>
+      </div>
+
+      <script>
+        let speechInstance;
+        function speakStory() {
+          const text = document.getElementById("storyText").innerText;
+          speechInstance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.speak(speechInstance);
+        }
+        function muteStory() {
+          window.speechSynthesis.cancel();
+        }
+      </script>
+    </div>
+
+    <!-- Discovery Engine (UPDATED TO CLICKABLE CARDS) -->
+    <div class="section">
+      <h2>🔍 Discovery Engine – Highlights of Somnathapura</h2>
+
+      <div class="card-grid">
+
+        <a href="https://www.google.com/search?q=Trikuta+Temple+Layout+Somnathapura"
+           target="_blank" class="card">
+          ⬤ Trikuta Temple Layout
+        </a>
+
+        <a href="https://www.google.com/search?q=Star+Shaped+Platform+Somnathapura"
+           target="_blank" class="card">
+          ⬤ 16-Point Star-shaped Platform
+        </a>
+
+        <a href="https://www.google.com/search?q=Vishnu+Avatars+Carvings+Somnathapura"
+           target="_blank" class="card">
+          ⬤ Intricate Sculptures of Vishnu Avatars
+        </a>
+
+        <a href="https://www.google.com/search?q=Hoysala+Emblems+Somnathapura"
+           target="_blank" class="card">
+          ⬤ Hoysala Emblems & Iconography
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Cultural Media Collector -->
+    <div class="section">
+      <h2>🎥 Cultural Media Collector</h2>
+
+      <h3>YouTube Exploration</h3>
+      <iframe src="https://www.youtube.com/embed/p05-9JAUQac" allowfullscreen></iframe>
+
+      <h3>Instagram Moments</h3>
+      <iframe 
+        src="https://www.instagram.com/reel/Cxe16C9v4Nm/embed/"
+        width="100%"
+        height="450"
+        frameborder="0"
+        scrolling="no"
+        allowfullscreen>
+      </iframe>
+
+      <h3>Wikipedia Summary</h3>
+      <iframe src="https://en.m.wikipedia.org/wiki/Chennakeshava_Temple,_Somanathapura"></iframe>
+    </div>
+
+    <!-- Nearby Explorer -->
+    <div class="section">
+      <h2>📍 Smart Nearby Explorer</h2>
+      <ul>
+        <li>Talakadu – 22 km</li>
+        <li>Mysuru Palace – 34 km</li>
+        <li>Somanathapura Museum – 1 km</li>
+        <li>Cauvery Riverbank – 3.5 km</li>
+      </ul>
+    </div>
+
+    <!-- Google Map -->
+    <div class="section">
+      <h2>🗺 Google Map</h2>
+      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31839.137884763606!2d76.99438880377474!3d12.191648683959106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba5d6c59d3a8f3f%3A0x7b57a97f0c1aaff0!2sChennakeshava%20Temple%2C%20Somanathapura!5e0!3m2!1sen!2sin!4v1702909999999">
+      </iframe>
+    </div>
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+  </div>
+</body>
+</html>

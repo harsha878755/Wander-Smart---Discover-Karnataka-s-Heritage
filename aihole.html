@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aihole – Heritage Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff8e1;
+      font-family: 'Inter', sans-serif;
+      color: #4e342e;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('https://im.whatshot.in/img/2020/Mar/aiholi-1-1583479698.jpg');
+      background-size: cover;
+      background-position: center 80%;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: #fff3d4;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 35px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b71c1c;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 330px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .story-box {
+      background: #fbe9d7;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    .map {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      font-weight: 600;
+      text-decoration: none;
+      color: #4e342e;
+      display: block;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      background: #ffe7c6;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Aihole – The Cradle of Indian Temple Architecture</h1>
+    <p>The birthplace of Chalukyan architectural innovation</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Storytelling Bot -->
+    <div class="section story-box">
+      <h2>Storytelling Bot – Listen to Aihole’s Tale</h2>
+
+      <!-- UPDATED STORY INSERTED -->
+      <div id="storyText">
+        <p>
+          Aihole is known as the cradle where Indian temple architecture was born. Over 1,300 years ago,
+          the Chalukyan craftsmen used this place as their workshop — a creative laboratory where they
+          experimented, learned, and perfected the designs that would later inspire India’s greatest temples.
+        </p>
+
+        <p>
+          As you walk through Aihole, you can see stones that still carry marks of experimentation.
+          Simple shrines stand beside early prototypes, showing how ideas slowly developed into
+          beautiful architectural styles. Each temple feels like a chapter in the growth of Indian art.
+        </p>
+
+        <p>
+          The Durga Temple curves gracefully like a rising wave.  
+          The Lad Khan Temple stands strong with its unique house-like design.  
+          The silent courtyards around them whisper stories of sculptors discussing, chiseling,
+          and working under the hot Karnataka sun.
+        </p>
+
+        <p>
+          Aihole is not just ancient — it is alive with the spirit of creativity.
+          It is a tale of beginnings, a story of imagination, and the birthplace of temples that
+          shaped the identity of Indian architecture.
+        </p>
+      </div>
+
+      <div class="story-controls">
+        <button onclick="speakStory()">🔊 Narrate</button>
+        <button onclick="muteStory()">🔇 Mute</button>
+      </div>
+
+      <script>
+        let speechInstance;
+        function speakStory() {
+          const text = document.getElementById("storyText").innerText;
+          speechInstance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.speak(speechInstance);
+        }
+        function muteStory() {
+          window.speechSynthesis.cancel();
+        }
+      </script>
+    </div>
+
+    <!-- Discovery Engine (UPDATED TO CLICKABLE CARDS) -->
+    <div class="section">
+      <h2>🔍 Discovery Engine – Hidden Spots of Aihole</h2>
+
+      <div class="card-grid">
+
+        <a href="https://www.google.com/search?q=Durga+Temple+Aihole"
+           target="_blank" class="card">
+          ⬤ Durga Temple – A semi-circular apsidal marvel
+        </a>
+
+        <a href="https://www.google.com/search?q=Lad+Khan+Temple+Aihole"
+           target="_blank" class="card">
+          ⬤ Lad Khan Temple – A unique Panchayatana layout
+        </a>
+
+        <a href="https://www.google.com/search?q=Ravana+Phadi+Cave+Temple+Aihole"
+           target="_blank" class="card">
+          ⬤ Ravana Phadi Cave Temple – Shiva carvings
+        </a>
+
+        <a href="https://www.google.com/search?q=Hucchimalli+Temple+Aihole"
+           target="_blank" class="card">
+          ⬤ Hucchimalli Temple – Early Dravidian model
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Cultural Media Collector -->
+    <div class="section">
+      <h2>🎥 Cultural Media Collector</h2>
+
+      <h3>YouTube Exploration</h3>
+      <iframe src="https://www.youtube.com/embed/drxZeUx_fhg" allowfullscreen></iframe>
+
+      <h3>Instagram Moments</h3>
+      <iframe 
+        src="https://www.instagram.com/reel/DBvCPuyvZCH/embed" 
+        allowfullscreen>
+      </iframe>
+
+      <h3>Wikipedia Summary</h3>
+      <iframe src="https://en.m.wikipedia.org/wiki/Aihole"></iframe>
+    </div>
+
+    <!-- Smart Nearby Explorer -->
+    <div class="section">
+      <h2>📍 Smart Nearby Explorer</h2>
+      <ul>
+        <li>Pattadakal – 14 km</li>
+        <li>Badami Cave Temples – 35 km</li>
+        <li>Meguti Jain Temple – 2 km</li>
+        <li>Gowda Temple Complex – 1 km</li>
+      </ul>
+    </div>
+
+    <!-- Google Map -->
+    <div class="section">
+      <h2>🗺Google Map – Aihole</h2>
+
+      <iframe class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.763356446226!2d75.88666187508433!3d16.02589658470916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc7130eacfa4851%3A0xfef474c0a7d4b3f1!2sAihole%20Monuments!5e0!3m2!1sen!2in!4v1702903456789">
+      </iframe>
+    </div>
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+  </div>
+
+</body>
+</html>

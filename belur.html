@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belur – Chennakeshava Heritage Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff8e1;
+      font-family: 'Inter', sans-serif;
+      color: #4e342e;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('https://skywalkviaggi.files.wordpress.com/2016/06/belur-temple.jpg') center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: #fff3d4;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 35px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b71c1c;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 330px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .story-box {
+      background: #fbe9d7;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    .map {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-decoration: none;
+      color: #4e342e;
+      font-weight: 600;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      background: #ffe3b0;
+      transform: translateY(-3px);
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Belur – Chennakeshava Temple</h1>
+    <p>A 900-year-old Hoysala masterpiece of devotion & stone artistry</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Storytelling Bot -->
+    <div class="section story-box">
+      <h2>Storytelling Bot – Listen to Belur's Tale</h2>
+
+      <div id="storyText">
+        <p>
+          In the peaceful landscapes of Karnataka stands Belur, a place where history feels alive and every carving tells a story.
+        </p>
+
+        <p>
+          Once the pride of the Hoysala Empire, Belur was a center of art, devotion, and unmatched craftsmanship.
+        </p>
+
+        <p>
+          Step into the Chennakeshava Temple and you’ll sense a calm, sacred energy that has lived here for nearly nine centuries.
+        </p>
+
+        <p>
+          The walls are filled with dancers, warriors, gods, and legends — carved with such detail they almost seem to move.
+        </p>
+
+        <p>
+          The famous floating pillar still surprises visitors with its precision and mystery — a quiet proof of the brilliance of Hoysala artisans.
+        </p>
+
+        <p>
+          Look up at the madanikas, the graceful stone maidens inspired by Queen Shantala Devi. Their elegance has survived centuries and still shines today.
+        </p>
+
+        <p>
+          As sunlight touches the temple’s intricate patterns, Belur becomes more than a monument — it becomes a memory you don’t just see, but feel.
+        </p>
+
+        <p>
+          Belur isn't just a place to visit. It's a place that stays with you.
+        </p>
+      </div>
+
+      <div class="story-controls">
+        <button onclick="speakStory()">🔊 Narrate</button>
+        <button onclick="muteStory()">🔇 Mute</button>
+      </div>
+
+      <script>
+        let speechInstance;
+        function speakStory() {
+          const text = document.getElementById("storyText").innerText;
+          speechInstance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.speak(speechInstance);
+        }
+        function muteStory() {
+          window.speechSynthesis.cancel();
+        }
+      </script>
+    </div>
+
+    <!-- Discovery Engine (Updated with Working Google Links) -->
+    <div class="section">
+      <h2>🔍 Hidden Wonders of Belur</h2>
+      <div class="card-grid">
+
+        <a class="card" target="_blank"
+           href="https://www.google.com/search?q=Mohini+Sculpture+Belur">
+          ⬤ Gravity-defying Sculpture – Mohini
+        </a>
+
+        <a class="card" target="_blank"
+           href="https://www.google.com/search?q=Narasimha+Pillar+Belur">
+          ⬤ Narasimha Pillar
+        </a>
+
+        <a class="card" target="_blank"
+           href="https://www.google.com/search?q=Shilabalikas+Belur">
+          ⬤ Shilabalikas (Celestial Dancers)
+        </a>
+
+        <a class="card" target="_blank"
+           href="https://www.google.com/search?q=Kappe+Chennigaraya+Shrine+Belur">
+          ⬤ Kappe Chennigaraya Shrine
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Cultural Media -->
+    <div class="section">
+      <h2>🎥 Cultural Media Collector</h2>
+
+      <h3>YouTube Exploration</h3>
+      <iframe src="https://www.youtube.com/embed/Fq5vsXWuUAw" allowfullscreen></iframe>
+
+      <h3>Instagram Moments</h3>
+      <iframe src="https://www.instagram.com/reel/DQoIyoTktEI/embed" allowfullscreen></iframe>
+
+      <h3>Wikipedia Summary</h3>
+      <iframe src="https://en.m.wikipedia.org/wiki/Chennakeshava_Temple,_Belur"></iframe>
+    </div>
+
+    <!-- Nearby Explorer -->
+    <div class="section">
+      <h2>📍 Smart Nearby Explorer</h2>
+      <ul>
+        <li>Hoysaleshwara Temple, Halebidu – 16 km</li>
+        <li>Kappe Chennigaraaya Temple – 200 m</li>
+        <li>Belur Archaeological Museum – 300 m</li>
+        <li>Yagachi Dam – 3 km</li>
+      </ul>
+    </div>
+
+    <!-- Google Map -->
+    <div class="section">
+      <h2>🗺 Google Map</h2>
+      <iframe class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.518269041942!2d75.86749757490018!3d13.164135312388015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbb9ec8f1fd1e8b%3A0x9b6ebadc177a64e3!2sChennakeshava%20Temple%2C%20Belur!5e0!3m2!1sen!2sin!4v1731600000000"
+        allowfullscreen loading="lazy"></iframe>
+    </div>
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+  </div>
+</body>
+</html>

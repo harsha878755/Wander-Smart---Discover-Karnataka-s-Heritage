@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banavasi – Heritage Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff8e1;
+      font-family: 'Inter', sans-serif;
+      color: #4e342e;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('https://tse3.mm.bing.net/th/id/OIP.4Lasz2KqnwVSulA_PvCEVQAAAA?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3') center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: #fff3d4;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 35px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b71c1c;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 330px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .story-box {
+      background: #fbe9d7;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    .map {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      margin-top: 15px;
+      border: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-decoration: none;
+      color: #4e342e;
+      font-weight: 600;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      background: #ffe3b0;
+      transform: translateY(-3px);
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Banavasi – The Ancient Capital of Karnataka</h1>
+    <p>One of India’s oldest historical towns, over 2,000 years old</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Storytelling Bot -->
+    <div class="section story-box">
+      <h2>Storytelling Bot – Listen to Banavasi's Tale</h2>
+
+      <div id="storyText">
+        <p>
+          Banavasi is one of the oldest towns in Karnataka, and walking through it feels like stepping
+          into a living poem. Mentioned in ancient Sanskrit literature, this peaceful riverside town
+          was once the heart of the Kadamba dynasty.
+        </p>
+
+        <p>
+          Life here moves gently. The Madhukeshwara Temple, built with warm golden stone, stands quietly
+          among green fields. Inside the temple, the scent of incense fills the air, and the carved Nandi
+          sits calmly — a symbol of devotion that has remained unchanged for centuries.
+        </p>
+
+        <p>
+          The town is lined with areca nut farms, traditional homes with sloping roofs, and local people
+          who still follow age-old customs. Banavasi has not rushed toward modernity; instead, it has chosen
+          to preserve its heritage and soul.
+        </p>
+
+        <p>
+          Banavasi is a story of simplicity, devotion, and a culture that survived not through grandeur,
+          but through quiet, steady living.
+        </p>
+      </div>
+
+      <div class="story-controls">
+        <button onclick="speakStory()">🔊 Narrate</button>
+        <button onclick="muteStory()">🔇 Mute</button>
+      </div>
+
+      <script>
+        let speechInstance;
+        function speakStory() {
+          const text = document.getElementById("storyText").innerText;
+          speechInstance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.speak(speechInstance);
+        }
+        function muteStory() {
+          window.speechSynthesis.cancel();
+        }
+      </script>
+    </div>
+
+    <!-- Discovery Engine (UPDATED) -->
+    <div class="section">
+      <h2>🔍 Discovery Engine – Hidden Spots of Banavasi</h2>
+      <div class="card-grid">
+
+        <a href="https://www.google.com/search?q=Madhukeshwara+Temple+Banavasi"
+           target="_blank" class="card">⬤ Madhukeshwara Temple – 1st century</a>
+
+        <a href="https://www.google.com/search?q=Kadamba+Heritage+Ruins+Banavasi"
+           target="_blank" class="card">⬤ Kadamba Heritage Ruins</a>
+
+        <a href="https://www.google.com/search?q=Royal+Bathing+Area+Banavasi"
+           target="_blank" class="card">⬤ Royal Bathing Area Remnants</a>
+
+        <a href="https://www.google.com/search?q=Banavasi+Fort"
+           target="_blank" class="card">⬤ Banavasi Fort Perimeter</a>
+
+      </div>
+    </div>
+
+    <!-- Cultural Media Collector -->
+    <div class="section">
+      <h2>🎥 Cultural Media Collector</h2>
+
+      <h3>YouTube Exploration</h3>
+      <iframe src="https://www.youtube.com/embed/LAC3JFnSD3I" allowfullscreen></iframe>
+
+      <h3>Instagram Moments</h3>
+      <iframe src="https://www.instagram.com/reel/C0BfRlGOcXK/embed/" allowfullscreen></iframe>
+
+      <h3>Wikipedia Summary</h3>
+      <iframe src="https://en.m.wikipedia.org/wiki/Banavasi"></iframe>
+    </div>
+
+    <!-- Smart Nearby Explorer -->
+    <div class="section">
+      <h2>📍 Smart Nearby Explorer</h2>
+      <ul>
+        <li>Madhukeshwara Temple – 300 m</li>
+        <li>Kadamba Dynasty Museum – 800 m</li>
+        <li>Varada River Banks – 900 m</li>
+        <li>Sirsi Marikamba Temple – 23 km</li>
+      </ul>
+    </div>
+
+    <!-- Google Map -->
+    <div class="section">
+      <h2>🗺 Google Map</h2>
+      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.284946161345!2d74.6865587!3d14.9989296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfa14fb3dfcc4f%3A0x7c8ee30fe50fa426!2sBanavasi!5e0!3m2!1sen!2sin!4v1702903420000"></iframe>
+    </div>
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+  </div>
+</body>
+</html>
